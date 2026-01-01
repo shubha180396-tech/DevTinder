@@ -15,14 +15,22 @@ const app = express();
 //   res.send("This is a test route.");
 // });
 
-app.get("/hello", (req, res) => {
-  res.send("Hello, World!");
+app.get("/user", (req, res) => {
+  res.send({ name: "John", age: 30 });
 });
-app.get("/test", (req, res) => {
-  res.send("This is a test route.");
+app.post("/user", (req, res) => {
+  res.send("Data received successfully!");
 });
-app.get("/", (req, res) => {
-  res.send("Welcome to the Home Page!");
+app.delete("/user", (req, res) => {
+  res.send("User deleted successfully!");
+});
+
+app.patch("/user", (req, res) => {
+  res.send("User updated successfully!");
+});
+
+app.put("/user", (req, res) => {
+  res.send("User updated successfully with PUT method!");
 });
 
 app.listen(8888, () => {
