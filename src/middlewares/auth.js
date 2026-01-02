@@ -1,3 +1,6 @@
+// Below is a simple implementation of authentication middleware for an Express.js application.
+// The middleware checks for specific tokens to authenticate admin and user roles.
+
 const adminAuth = (req, res, next) => {
   const token = "abc";
   if (token === "abc") {

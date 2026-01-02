@@ -1,21 +1,30 @@
 const express = require("express");
+const connectDB = require("./config/database");
 const app = express();
-const { adminAuth, userAuth } = require("./middlewares/auth");
+const User = require("./models/user");
 
-app.use("/admin", adminAuth);
+app.post("/signup", async (req, res) => {
+  const userObj = {
+    firstName: "Shu",
+    lastName: "R",
+    emailId: "shubha@gmail.com",
+    password: "shubha@123",
+    age: 24,
+    gender: "Female",
+  };
+  const user = new User(userObj);
 
-app.get("/admin/getData", (req, res) => {
-  res.send("Get Data");
+  await user.save();
+  res.send("User signed up successfully");
 });
 
-app.get("/admin/deleteData", (req, res) => {
-  res.send("Delete Data");
-});
-
-app.get("/user", userAuth, (req, res) => {
-  res.send("Get user endpoint2");
-});
-
-app.listen(8888, () => {
-  console.log("Server is running on port 8888");
-});
+connectDB()
+  .then(() => {
+    console.log("Database connected successfully");
+    app.listen(8888, () => {
+      console.log("Server is running on port 8888");
+    });
+  })
+  .catch((err) => {
+    console.error("Database connection error:", err);
+  });
