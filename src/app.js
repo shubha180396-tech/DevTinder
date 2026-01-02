@@ -1,36 +1,19 @@
 const express = require("express");
 const app = express();
-// app.use(express.json());
+const { adminAuth, userAuth } = require("./middlewares/auth");
 
-// Sample route
-// app.use("/", (req, res) => {
-//   res.send("Welcome to the Home Page!");
-// });
+app.use("/admin", adminAuth);
 
-// app.use("/hello", (req, res) => {
-//   res.send("   Hello, World!");
-// });
-
-// app.use("/test", (req, res) => {
-//   res.send("This is a test route.");
-// });
-
-app.get("/user", (req, res) => {
-  res.send({ name: "John", age: 30 });
-});
-app.post("/user", (req, res) => {
-  res.send("Data received successfully!");
-});
-app.delete("/user", (req, res) => {
-  res.send("User deleted successfully!");
+app.get("/admin/getData", (req, res) => {
+  res.send("Get Data");
 });
 
-app.patch("/user", (req, res) => {
-  res.send("User updated successfully!");
+app.get("/admin/deleteData", (req, res) => {
+  res.send("Delete Data");
 });
 
-app.put("/user", (req, res) => {
-  res.send("User updated successfully with PUT method!");
+app.get("/user", userAuth, (req, res) => {
+  res.send("Get user endpoint2");
 });
 
 app.listen(8888, () => {
